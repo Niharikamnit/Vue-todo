@@ -1,6 +1,6 @@
 <template lang="pug">
   nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container
+    .navContainer
       .row
         .col-sm
           img(src="../includes/to-do-list-icon.png")
@@ -18,6 +18,7 @@ interface tabs{
   name: string,
   route: string
 }
+@observer
 @Component
 export default class NavBar extends Vue{
 
@@ -31,10 +32,10 @@ export default class NavBar extends Vue{
       name: "About",
       route: "/about"
     },
-    // {
-    //   name: "Info",
-    //   route: "/info"
-    // }
+    {
+      name: "Todo List",
+      route: "/todolist"
+    }
 ]
 }
 

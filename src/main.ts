@@ -4,14 +4,20 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store/todoList'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import VCalendar from 'v-calendar';
+import Sortable from 'vue-sortable'
 
-
+// Use v-calendar & v-date-picker components
+Vue.use(VCalendar, {
+              // ...other defaults
+});
+Vue.use(Sortable);
 Vue.config.productionTip = false
 
 new Vue({
   router,
-  //giving error
   // store,
+  // VCalendar,
   render: h => h(App)
 }).$mount('#app')
 

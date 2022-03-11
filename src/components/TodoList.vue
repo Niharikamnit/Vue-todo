@@ -2,7 +2,7 @@
 //- include ../includes/mixins
 
 html
-  body.container(v-on:scroll="scrollFunction")
+  body.todolist(v-on:scroll="scrollFunction")
         addTodo()
         table.table.table-light
           thead
@@ -17,7 +17,7 @@ html
               th(scope='col') Delete
           |     
           tbody(name="slide" is="transition-group")
-            tr(v-for='(task,index) in vm.tasks', :key='index')
+            tr(v-for='(task,index) in vm.tasks', :key='index' draggable @dragstart="startDrag($event,task)"  @drop="onDrop($event)" @dragover.prevent @dragenter.prevent)
               th
                 span(contenteditable='true', v-on:keydown.enter='editTask($event,index)', v-on:blur='editTask($event,index)', v-bind:class="{'done' : task.finished}")
                   | {{task.name}}
@@ -112,11 +112,27 @@ export default class TodoList extends Vue {
   scrollToTop() {
       window.scrollTo(0,0);
   }
+  /* eslint-disable no-mixed-spaces-and-tabs */
+  // startDrag (evt:any, item:any) {
+  //   evt.dataTransfer.dropEffect = 'move'
+  //   evt.dataTransfer.effectAllowed = 'move'
+  //   evt.dataTransfer.setData('itemID', item.id)
+  //   console.log(evt.dataTransfer.getData('itemID'));
+  // }
+  // onDrop (evt:any) {
+  // 	const itemID = evt.dataTransfer.getData('itemID')
+  // 	const item = this.vm.tasks.find((item,index) => {
+  //     console.log(item.id);
+  //     item.id === itemID})
+  //   console.log(item);
+  // }
+  /* eslint-disable no-mixed-spaces-and-tabs */
+
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss">
+<style lang="scss" scoped>
 
 .pointer {
   cursor: pointer;
@@ -127,7 +143,9 @@ export default class TodoList extends Vue {
 .display{
   display: none;
 }
-
+.todolist{
+  margin: 50px;
+}
 .slide-leave-active,
 .slide-enter-active {
   transition: 1s;

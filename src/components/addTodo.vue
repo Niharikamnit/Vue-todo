@@ -1,7 +1,7 @@
 <template lang="pug">
 html
   body
-    .container
+    .addTodo
       .d-flex
         input.form-control(v-model='data.name', v-on:keyup.enter.prevent='submitTask', type='text', placeholder='Enter Text')
         |         
@@ -41,7 +41,7 @@ export default class addTodo extends Vue {
 </script>
 
 <style lang="scss">
-.container{
+.addTodo{
     margin: 20px;
 }
 </style>

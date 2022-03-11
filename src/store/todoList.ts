@@ -3,7 +3,8 @@ import Todo from './todo';
 interface todo{
     name: string,
     status: string,
-    finished: boolean
+    finished: boolean,
+    id: number
 }
 export default class TodoList{
     @observable
