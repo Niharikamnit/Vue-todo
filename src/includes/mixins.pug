@@ -1,0 +1,9 @@
+mixin status(obj)
+    div(v-if='obj.undones>0')
+        | Task not finished #{obj.undones}
+    |     
+    div(v-else-if='obj.tasks.length>0')
+        | All tasks are done!
+    |     
+    div(v-else='')
+        | No tasks!
