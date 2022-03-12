@@ -1,6 +1,7 @@
 <template lang="pug">
-  .calendar
-    v-calendar(title-position="left" :attributes='attributes')
+  body
+    .calendar
+      v-calendar(title-position="left" :attributes='attributes')
     .card
       .card-header Featured
       .card-body
@@ -15,11 +16,12 @@ import {observer} from 'mobx-vue';
 @observer
 @Component
 export default class HomeView extends Vue {
+
   attributes:any= [
       {
         key: 'today',
-          highlight: true,
-          dates: new Date(),
+        highlight: true,
+        dates: ['2022-03-13'],
       }
     ];
     dateObj = new Date();
@@ -32,9 +34,14 @@ export default class HomeView extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.calendar{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+// .calendar{
+
+// }
+body {
+  margin: 20px;
+  background-color: transparent !important;
 }
+// .calendar{
+// width: inherit;
+// }
 </style>
