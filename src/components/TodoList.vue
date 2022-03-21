@@ -17,7 +17,7 @@ html
               th(scope='col') Delete
           |     
           tbody(name="slide" is="transition-group")
-            tr(v-for='(task,index) in vm.tasks', :key='index' draggable @dragstart="startDrag($event,task)"  @drop="onDrop($event)" @dragover.prevent @dragenter.prevent)
+            tr(v-for='(task,index) in vm.tasks', :key='index' draggable="true" @dragstart="startDrag($event,index)"  @drop="onDrop($event,index)" @dragover.prevent @dragenter.prevent)              
               th
                 span(contenteditable='true', v-on:keydown.enter='editTask($event,index)', v-on:blur='editTask($event,index)', v-bind:class="{'done' : task.finished}")
                   | {{task.name}}
@@ -65,7 +65,6 @@ export default class TodoList extends Vue {
   //typescript has problem if the type can be trivially infered by im still mentioning it
   name= "task";
 
-  //unable to define an object
   data:data={
     done:false,
     display: true
@@ -113,21 +112,24 @@ export default class TodoList extends Vue {
       window.scrollTo(0,0);
   }
   /* eslint-disable no-mixed-spaces-and-tabs */
-  // startDrag (evt:any, item:any) {
-  //   evt.dataTransfer.dropEffect = 'move'
-  //   evt.dataTransfer.effectAllowed = 'move'
-  //   evt.dataTransfer.setData('itemID', item.id)
-  //   console.log(evt.dataTransfer.getData('itemID'));
-  // }
-  // onDrop (evt:any) {
-  // 	const itemID = evt.dataTransfer.getData('itemID')
-  // 	const item = this.vm.tasks.find((item,index) => {
-  //     console.log(item.id);
-  //     item.id === itemID})
-  //   console.log(item);
-  // }
+  startDrag (evt:any, index:any) {
+    console.log("drag index:" + index);
+    evt.dataTransfer.dropEffect = 'move'
+    evt.dataTransfer.effectAllowed = 'move'
+    evt.dataTransfer.setData('itemID', index)
+    console.log(evt.dataTransfer.getData('itemID'));
+  }
+  onDrop (evt:any, index:any) {
+    console.log("dropp"+index);
+  	const olditemID = evt.dataTransfer.getData('itemID')
+    const draggedele = this.vm.tasks[olditemID];
+    const droppedele = this.vm.tasks[index];
+    console.log(draggedele);
+    console.log(droppedele); 
+    this.vm.tasks.splice(olditemID,1);
+    this.vm.tasks.splice(index,0,draggedele);
+  }
   /* eslint-disable no-mixed-spaces-and-tabs */
-
 }
 </script>
 
