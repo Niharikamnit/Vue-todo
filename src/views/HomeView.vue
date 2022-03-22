@@ -21,7 +21,7 @@ export default class HomeView extends Vue {
       {
         key: 'today',
         highlight: true,
-        dates: ['2022-03-13'],
+        dates: ['2022-03-21'],
       }
     ];
     dateObj = new Date();

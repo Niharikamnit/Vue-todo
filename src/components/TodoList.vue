@@ -29,6 +29,9 @@ html
               td
                 div
                   button.btn.btn-danger(type='button', v-on:click='deleteTask(index)') Delete
+              td
+                div
+                  button
         |
         //- - const obj = {undones: vm.undones, tasks: vm.tasks}
         //- +status(obj)
